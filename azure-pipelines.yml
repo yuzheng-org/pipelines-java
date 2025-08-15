@@ -15,7 +15,7 @@ steps:
   inputs:
     SonarQube: 'SonarQube EE Local'
     scannerMode: 'other'
-    extraProperties: sonar.projectKey='first-project_first-project_0363e2f9-4cd3-477a-a308-4ec50da1d547'
+    extraProperties: sonar.projectKey=first-project_first-project_0363e2f9-4cd3-477a-a308-4ec50da1d547
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
