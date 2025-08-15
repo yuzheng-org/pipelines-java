@@ -10,6 +10,12 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# Prepare Analysis Configuration task
+- task: SonarQubePrepare@7
+  inputs:
+    SonarQube: 'SonarQube EE Local'
+    scannerMode: 'other'
+    extraProperties: sonar.projectKey='first-project_first-project_0363e2f9-4cd3-477a-a308-4ec50da1d547'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -20,3 +26,14 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+
+# If you use Maven: add the Execute Maven goal as shown below
+- task: Maven@4
+  inputs:
+    sonarQubeRunAnalysis: true
+
+# Publish Quality Gate Result task
+- task: SonarQubePublish@7
+  inputs:
+    pollingTimeoutSec: '300'
